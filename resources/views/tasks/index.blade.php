@@ -90,6 +90,11 @@
             color: #10b981 !important;
         }
 
+        .due-date {
+            font-weight: bold;
+            color: #7c3aed !important;
+        }
+
         button,
         .edit-btn {
             border: none;
@@ -161,11 +166,11 @@
 
         <div class="task">
 
-            <h2>{{ $task->title }}</h2>
+            <h2>{{ $task->task_name }}</h2>
 
             <p>{{ $task->description }}</p>
 
-            @if($task->completed)
+            @if($task->status === 'Completed')
                 <p class="status completed">
                     Status: Completed
                 </p>
@@ -175,7 +180,17 @@
                 </p>
             @endif
 
-            @if(!$task->completed)
+            @if($task->due_date)
+                <p class="due-date">
+                    Due Date: {{ $task->due_date->format('F d, Y') }}
+                </p>
+            @else
+                <p class="due-date">
+                    Due Date: No due date
+                </p>
+            @endif
+
+            @if($task->status !== 'Completed')
                 <form action="{{ route('tasks.complete', $task) }}"
                       method="POST"
                       style="display:inline;">

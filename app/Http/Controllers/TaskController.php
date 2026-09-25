@@ -9,7 +9,7 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $tasks = Task::latest()->get();
+        $tasks = Task::orderBy('due_date')->get();
 
         return view('tasks.index', compact('tasks'));
     }
@@ -21,20 +21,22 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'nullable',
+        $request->validate([
+            'task_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'required|in:Pending,Completed',
+            'due_date' => 'nullable|date',
         ]);
 
-        Task::create($validated);
+        Task::create([
+            'task_name' => $request->task_name,
+            'description' => $request->description,
+            'status' => $request->status,
+            'due_date' => $request->due_date,
+        ]);
 
         return redirect()->route('tasks.index')
-            ->with('success', 'Task created successfully!');
-    }
-
-    public function show(Task $task)
-    {
-        return view('tasks.show', compact('task'));
+            ->with('success', 'Task added successfully!');
     }
 
     public function edit(Task $task)
@@ -44,12 +46,19 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-        $validated = $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'nullable',
+        $request->validate([
+            'task_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'status' => 'required|in:Pending,Completed',
+            'due_date' => 'nullable|date',
         ]);
 
-        $task->update($validated);
+        $task->update([
+            'task_name' => $request->task_name,
+            'description' => $request->description,
+            'status' => $request->status,
+            'due_date' => $request->due_date,
+        ]);
 
         return redirect()->route('tasks.index')
             ->with('success', 'Task updated successfully!');
@@ -66,9 +75,10 @@ class TaskController extends Controller
     public function complete(Task $task)
     {
         $task->update([
-            'completed' => !$task->completed,
+            'status' => 'Completed',
         ]);
 
-        return redirect()->route('tasks.index');
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task marked as completed!');
     }
 }
