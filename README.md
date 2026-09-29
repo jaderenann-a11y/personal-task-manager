@@ -82,10 +82,10 @@ The system follows this process:
 ### Completed Task
 
 ![Completed Task](https://github.com/user-attachments/assets/11f5c78c-2612-40d2-a691-6676c6e7845b)
+
 ### Delete Task
 
-![Delete List](https://github.com/user-attachments/assets/c0a81f76-1204-4534-aa64-e2fd1e372e55)
-
+![Delete Task](https://github.com/user-attachments/assets/c0a81f76-1204-4534-aa64-e2fd1e372e55)
 ## Output
 
 The completed system successfully allows the user to manage tasks through the Laravel application.
