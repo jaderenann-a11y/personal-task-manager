@@ -8,11 +8,11 @@ WST21-PM-2026-SF
 
 ## Student Name
 
-Julia Bahag
+Renan Jade I Bahag
 
 ## Course & Year
 
-Grade 9
+BSIT-2 SECTION 7 
 
 ## Database Used
 
