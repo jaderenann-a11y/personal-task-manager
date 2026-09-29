@@ -9,10 +9,6 @@ A simple Personal Task Manager built using Laravel. The system allows users to a
 **Course & Section:** BSIT-2 SECTION 7  
 **Database:** SQLite
 
-## Database Used
-
-**SQLite**
-
 ## Technologies Used
 
 - Laravel
